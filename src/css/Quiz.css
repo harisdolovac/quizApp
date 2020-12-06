@@ -1,0 +1,9 @@
+.quiz {
+  display: flex;
+}
+
+.left_quiz {
+  background-color: rgb(70, 70, 215);
+  width: 50%;
+  height: 100vh;
+}
