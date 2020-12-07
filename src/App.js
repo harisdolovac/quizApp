@@ -1,12 +1,13 @@
 import React from "react";
 
 import "./App.css";
-import Quiz from "./Quiz";
+
+import QuizQuestions from "./QuizQuestions";
 
 function App() {
   return (
     <div className="App">
-      <Quiz />
+      <QuizQuestions />
     </div>
   );
 }

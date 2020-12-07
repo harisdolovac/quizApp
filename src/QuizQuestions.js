@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import "./css/Quiz.css";
+import Counter from "./Counter";
+
 const QuizQuestions = () => {
   const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
@@ -52,20 +55,26 @@ const QuizQuestions = () => {
 
   return (
     <div>
-      <h2>{question}</h2>
-      <h2>
-        Your answer is:
-        <form onSubmit={handleSubmitForm}>
-          <input type="text" value={answer} onChange={handleAnswer} />
-          <button onClick={handleAxios} type="submit">
-            Submit answer
-          </button>
-        </form>
-      </h2>
+      <div className="quiz">
+        <div className="left_quiz">
+          levo za sat
+          <Counter numberOfAnswers={numberOfAnswers} />
+        </div>
+        <div className="right_quiz">
+          <h2>{question}</h2>
+          <h2>
+            Your answer is:
+            <form onSubmit={handleSubmitForm}>
+              <input type="text" value={answer} onChange={handleAnswer} />
+              <button onClick={handleAxios} type="submit">
+                Submit answer
+              </button>
+            </form>
+          </h2>
 
-      <h3>Tacan odgovor je : {correctAnswer}</h3>
-
-      <h1>Number of correct Answers: {numberOfAnswers}</h1>
+          <h3>Tacan odgovor je : {correctAnswer}</h3>
+        </div>
+      </div>
     </div>
   );
 };
