@@ -5,13 +5,11 @@ import "./css/Quiz.css";
 import Counter from "./Counter";
 
 const QuizQuestions = () => {
-  const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [numberOfAnswers, setnumberOfAnswers] = useState(0);
-
-  // console.log("corranswer", correctAnswer);
+  const [numberOfWrongAnswers, setnumberOfWrongAnswers] = useState(0);
 
   useEffect(() => {
     axios.get("http://jservice.io/api/random").then((res) =>
@@ -40,12 +38,12 @@ const QuizQuestions = () => {
         return (
           <div>
             {setQuestion(item.question)}
-            {setQuestions((prevState) => [...prevState, item])}
+
             {setCorrectAnswer(item.answer)}
             {setAnswer("")}
             {answer.toUpperCase() === correctAnswer.toUpperCase()
               ? setnumberOfAnswers((prevState) => prevState + 1)
-              : console.log("nije tacan odg")}
+              : setnumberOfWrongAnswers((prevState) => prevState + 1)}
           </div>
         );
       })
@@ -57,19 +55,20 @@ const QuizQuestions = () => {
     <div>
       <div className="quiz">
         <div className="left_quiz">
-          <Counter numberOfAnswers={numberOfAnswers} />
+          <Counter
+            numberOfAnswers={numberOfAnswers}
+            numberOfWrongAnswers={numberOfWrongAnswers}
+          />
         </div>
         <div className="right_quiz">
           <h2>{question}</h2>
-          <h2>
-            Your answer is:
-            <form onSubmit={handleSubmitForm}>
-              <input type="text" value={answer} onChange={handleAnswer} />
-              <button onClick={handleAxios} type="submit">
-                Submit answer
-              </button>
-            </form>
-          </h2>
+          <h2 style={{ margin: "30px 0" }}>Your answer is:</h2>
+          <form onSubmit={handleSubmitForm}>
+            <input type="text" value={answer} onChange={handleAnswer} />
+            <button onClick={handleAxios} type="submit">
+              Submit answer
+            </button>
+          </form>
         </div>
       </div>
     </div>

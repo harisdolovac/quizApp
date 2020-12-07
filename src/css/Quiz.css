@@ -14,12 +14,14 @@
   max-width: 50%;
 }
 .right_quiz {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 10%;
-  margin-right: 10%;
+}
+.right_quiz h2 {
+  margin: 20px 20px;
 }
 
 .right_quiz input {
@@ -52,10 +54,11 @@
     height: 100vh;
   }
   .right_quiz {
+    background-color: #4646d7;
   }
 
   .left_quiz {
-    /*  */
+    background-color: #4646d7;
     height: auto;
     width: auto;
   }
