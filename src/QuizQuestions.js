@@ -57,7 +57,6 @@ const QuizQuestions = () => {
     <div>
       <div className="quiz">
         <div className="left_quiz">
-          levo za sat
           <Counter numberOfAnswers={numberOfAnswers} />
         </div>
         <div className="right_quiz">
@@ -71,8 +70,6 @@ const QuizQuestions = () => {
               </button>
             </form>
           </h2>
-
-          <h3>Tacan odgovor je : {correctAnswer}</h3>
         </div>
       </div>
     </div>

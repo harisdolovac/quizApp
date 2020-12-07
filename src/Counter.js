@@ -1,13 +1,14 @@
 import React from "react";
 import ReactCountdownClock from "react-countdown-clock";
 import swal from "@sweetalert/with-react";
+import "./css/Counter.css";
 
 const Counter = ({ numberOfAnswers }) => {
   const myCallback = () => {
     return swal({
-      text: "How was your experience getting help with this issue?",
+      icon: "success",
       buttons: {
-        cancel: "Close",
+        cancel: "Start Quiz Again",
       },
       content: (
         <div>
@@ -15,13 +16,15 @@ const Counter = ({ numberOfAnswers }) => {
           <h2>Number of correct Answers: {numberOfAnswers}</h2>
         </div>
       ),
+    }).then(function () {
+      window.location = "redirectURL";
     });
   };
 
   return (
-    <div>
+    <div className="clock_Counter">
       <ReactCountdownClock
-        seconds={0.2}
+        seconds={60}
         color="#000"
         alpha={0.9}
         size={300}
