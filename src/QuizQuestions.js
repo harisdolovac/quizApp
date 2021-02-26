@@ -15,14 +15,14 @@ const QuizQuestions = () => {
     axios.get("http://jservice.io/api/random").then((res) =>
       res.data.map((item) => {
         return (
-          <>
-            {setQuestion(item.question)}
-            {setCorrectAnswer(item.answer)}
-          </>
+          <div key={item.id}>
+            {setQuestion((prevState) => (prevState = item.question))}
+            {setCorrectAnswer((prevState) => (prevState = item.answer))}
+          </div>
         );
       })
     );
-  }, []);
+  }, [numberOfWrongAnswers, numberOfAnswers]);
 
   const handleAnswer = (e) => {
     setAnswer(e.target.value);
@@ -30,26 +30,13 @@ const QuizQuestions = () => {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
+
+    answer.toUpperCase() === correctAnswer.toUpperCase()
+      ? setnumberOfAnswers((prevState) => prevState + 1)
+      : setnumberOfWrongAnswers((prevState) => prevState + 1);
+
+    setAnswer("");
   };
-
-  const handleAxios = () =>
-    axios.get("http://jservice.io/api/random").then((res) =>
-      res.data.map((item) => {
-        return (
-          <div>
-            {setQuestion(item.question)}
-
-            {setCorrectAnswer(item.answer)}
-            {setAnswer("")}
-            {answer.toUpperCase() === correctAnswer.toUpperCase()
-              ? setnumberOfAnswers((prevState) => prevState + 1)
-              : setnumberOfWrongAnswers((prevState) => prevState + 1)}
-          </div>
-        );
-      })
-    );
-
-  //   console.log("pitanja", answer);
 
   return (
     <div>
@@ -61,13 +48,16 @@ const QuizQuestions = () => {
           />
         </div>
         <div className="right_quiz">
-          <h2>{question}</h2>
+          {question === "" ? (
+            <h1>Press submit answer,there is no data from server</h1>
+          ) : (
+            <h2>{question}</h2>
+          )}
+
           <h2 style={{ margin: "30px 0" }}>Your answer is:</h2>
           <form onSubmit={handleSubmitForm}>
             <input type="text" value={answer} onChange={handleAnswer} />
-            <button onClick={handleAxios} type="submit">
-              Submit answer
-            </button>
+            <button type="submit">Submit answer</button>
           </form>
         </div>
       </div>

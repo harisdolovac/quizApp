@@ -24,7 +24,7 @@ const Counter = ({ numberOfAnswers, numberOfWrongAnswers }) => {
   return (
     <div style={{ alignItems: "center" }}>
       <ReactCountdownClock
-        seconds={60}
+        seconds={30}
         color="#000"
         alpha={0.9}
         size={300}
